@@ -57,16 +57,19 @@ this.Routes.prototype = {
 
     // Pages that are "internal" can only be viewed by a logged in user
     if (internal && !Meteor.userId()) {
-      router.render(Template['404']);
+      this.go('/');
       return;
     }
 
-    // If all is well, go to the requested page!
-    if (!internal || Meteor.userId()) {
-      // Set data for this template to use
-      Session.set('templateData', templateData || {});
-      router.render(template);
+    // Pages that are "internal" can only be viewed by a logged in user
+    if (internal === false && Meteor.userId()) {
+      this.go('/chat');
+      return;
     }
+
+    // If all is well, set data for the template and go to the requested page!
+    Session.set('templateData', templateData || {});
+    router.render(template);
   },
 
   /*
