@@ -1,10 +1,14 @@
 /*
-    The colors collection
+    The messages collection
+
+    content
+    creator_user_id
+    ctime
  */
 
-var Messages = new Meteor.Collection("messages");
+var Messages = new Meteor.Collection('messages');
 
-Meteor.publish("messages", function() {
+Meteor.publish('messages', function() {
   return Messages.find();
 });
 
@@ -19,6 +23,8 @@ Messages.deny({
 });
 Messages.allow({
   insert: function(userId, doc) {
+    doc.creator_user_id = userId;
+    doc.ctime = new Date().getTime();
     return true;
   }
 });

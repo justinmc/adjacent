@@ -1,0 +1,20 @@
+<template name="chat">
+	<div id="page-chat" class="page">
+      <h2>Chat Stuff</h2>
+      <form class="form-message">
+          <input class="message" type="text" placeholder="Message" value="{{messageContentPending}}" />
+          <button type="submit">Submit</button>
+      </form>
+      <br />
+      <ul>
+          {{#each messages}}
+              <li>
+                <b>{{content}}</b>
+                <br />
+                <i>by {{creator}} at {{ctime_formatted}}</i>
+              </li>
+          {{/each}}
+      </ul>
+	</div>
+</template>
+
